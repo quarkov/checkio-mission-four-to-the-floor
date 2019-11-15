@@ -1,0 +1,26 @@
+"use strict";
+
+function isCovered(room, sensors) {
+
+    // your code here
+    return True;
+}
+
+var assert = require('assert');
+if (!global.is_checking) {
+    console.log('Example:');
+    console.log(isCovered([200, 150], [[100, 75, 130]]));
+
+    // These "asserts" are used for self-checking and not for an auto-testing
+    assert.equal(isCovered([200, 150], [[100, 75, 130]]), True);
+    assert.equal(isCovered([200, 150], [[50, 75, 100], [150, 75, 100]]), True);
+    assert.equal(isCovered([200, 150], [[50, 75, 100], [150, 25, 50], [150, 125, 50]]), False);
+    assert.equal(isCovered([200, 150], [[100, 75, 100], [0, 40, 60], [0, 110, 60], [200, 40, 60], [200, 110, 60]]), True);
+    assert.equal(isCovered([200, 150], [[100, 75, 100], [0, 40, 50], [0, 110, 50], [200, 40, 50], [200, 110, 50]]), False);
+    assert.equal(isCovered([200, 150], [[100, 75, 110], [105, 75, 110]]), False);
+    assert.equal(isCovered([200, 150], [[100, 75, 110], [105, 75, 20]]), False);
+    assert.equal(isCovered([3, 1], [[1, 0, 2], [2, 1, 2]]), True);
+    assert.equal(isCovered([30, 10], [[0, 10, 10], [10, 0, 10], [20, 10, 10], [30, 0, 10]]), True);
+    assert.equal(isCovered([30, 10], [[0, 10, 8], [10, 0, 7], [20, 10, 9], [30, 0, 10]]), True);
+    console.log("Coding complete? Click 'Check' to earn cool rewards!");
+}

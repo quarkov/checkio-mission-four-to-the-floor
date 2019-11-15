@@ -1,0 +1,97 @@
+<!-- Describe task in general -->
+
+<p>
+    Why don't we talk about the <a href="https://en.wikipedia.org/wiki/Passive_infrared_sensor" title="PIR wiki page">PIR sensors</a> (passive infrared sensors) systems?<br>
+    Let's talk about them and then solve a thematic mission.
+</p>
+
+<p align="justify">
+    If there's a need for motion detection, we have various options at our disposal, all based on the general principle of tracking environmental change.
+    Narrowing the concept of "motion detection" down to the concept of "human detection", it becomes obvious that one of the most convenient way to detect
+    a human presence (entrance) is to keep tracking constantly a certain distinctive environmental characteristic that is attributable for a human as well as for any other possible object.
+    And this kind of a characteristic really exists. Everything in the world emits
+    <a href="https://en.wikipedia.org/wiki/Thermal_radiation" title="thermal radiation on wiki">thermal radiation</a>. The
+    radiation density depends on the temperature of the object and its surface area. And here I must add that infrared light is nothing but thermal radiation.
+    Although this radiation is not visible to the human eye, it is quite intense.
+    You can feel it if place your palm near (not onto!) a hot object, a cup of coffee for example.
+</p>
+<p align="justify">
+    Knowing mentioned above, it's quite easy to realize how PIR sensor systems operate, right?
+    Imagine a locked room and a sensor "looking" down from the ceiling (or look at the schema below). Remember that everything emits thermal radiation, so
+    our sensor will register a conventionally constant level of the background thermal emission, so called thermal imprint.
+    In order a PIR sensor system won't be triggered by a pet, the maintainers of such a system increase its sensitivity threshold.
+    That threshold isn't that high though, especially taking into account the human body that emits ~1kW of thermal radiation.
+    So when a man enters a sensor's field of view, the sensor detects significantly increased level of thermal radiation
+    and triggers either a security system which notifies the owner or a lighting system which turns on the lights.
+</p>
+<br>
+<p style="text-align: center;">
+    <img  title="example" src="{{MEDIA}}pir1.png" alt="PIR sensor" style="max-height: 350px"/>
+</p>
+<br>
+<p align="justify">
+    And now, finally, the mission's objective. Given a room's size and a list of PIR sensors mounted on the room's ceiling and looking down on the floor,
+    your task is to determine whether the floor area is completely into the sensors coverage area (return True) or not (return False). The bottom left corner of the rectangle matches the origin point <b>O</b>,
+    the top right corner is defined by <b>W</b> and <b>H</b>. Each sensor is defined by its mounting point (coordinates <b>x<sub>i</sub></b> and <b>y<sub>i</sub></b>) and its range (<b>R<sub>i</sub></b>).
+</p>
+<!-- Explain input and output values
+<p style="text-align: center;">
+    <img  title="example" src="{{MEDIA}}pir_scheme.png" alt="scheme" style="max-height: 350px"/>
+</p>
+-->
+<!-- Explain input and output values -->
+<p>
+    <strong>Input: </strong> Two arguments:
+    <ul>
+        <li>the first is a list containing a room's top right corner coordinates,all are integers [W, H]</li>
+        <li>the second is a list, containing sensors info, all are integers
+            [[x<sub>i</sub>, y<sub>i</sub>, R<sub>i</sub>],
+            [x<sub>i+1</sub>, y<sub>i+1</sub>, R<sub>i+1</sub>],
+            .....,
+            [x<sub>n</sub>, y<sub>n</sub>, R<sub>n</sub>]]
+        </li>
+    </ul>
+</p>
+
+<p>
+    <strong>Output: </strong> True or False.
+</p>
+
+
+<!-- Give some usage examples -->
+<div class="for_info_only">
+    <p>
+        <strong>Example:</strong>
+    </p>
+
+{% if interpreter.slug == "js-node" %}
+<pre class="brush: javascript">isCovered([200, 150], [[100, 75, 130]]) == True                                   //example №1
+isCovered([200, 150], [[50, 75, 100], [150, 75, 100]]) == True                    //example №2
+isCovered([200, 150], [[50, 75, 100], [150, 25, 50], [150, 125, 50]]) == False    //example №3
+</pre>
+{% else %}
+<pre class="brush: python">is_covered([200, 150], [[100, 75, 130]]) == True                                   #example №1
+is_covered([200, 150], [[50, 75, 100], [150, 75, 100]]) == True                    #example №2
+is_covered([200, 150], [[50, 75, 100], [150, 25, 50], [150, 125, 50]]) == False    #example №3
+</pre>
+{% endif %}
+</div>
+
+<p style="text-align: center;">
+    <img  title="example" src="{{MEDIA}}examples.png" alt="PIR sensor" style="max-height: 350px"/>
+</p>
+<!-- Here you can explain some constraints for input-->
+<!-- The section is optional -->
+<p>
+    <strong>Precondition:</strong><br>
+    All given values are integers.
+    <ul>
+        <li>if (int - 10e-6 < f < int + 10e6) then (f == int)</li>
+        <li>H ∈ (0; 1000]</li>
+        <li>W ∈ [H; 4*H]</li>
+        <li>x<sub>i</sub> ∈ [0; W]</li>
+        <li>y<sub>i</sub> ∈ [0; H]</li>
+        <li>R<sub>i</sub> ∈ (0; 1500]</li>
+        <li>n ∈ [1; 10]</li>
+    </ul>
+</p>
