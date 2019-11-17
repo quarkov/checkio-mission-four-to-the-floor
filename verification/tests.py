@@ -1,11 +1,116 @@
-"""
-TESTS is a dict with all of your tests.
-Keys for this will be the categories' names.
-Each test is a dict with
-    "input" -- input data for a user function
-    "answer" -- your right answer
-    "explanation" -- not necessarily a key, it's used for an additional info in animation.
-"""
+from math import sqrt
+from itertools import combinations
+from collections import defaultdict
+from random import choice
+
+
+def judge(room, sensors):
+    corners = (0, 0), (0, room[1]), (room[0], 0), (room[0], room[1])
+    uncovered_dots = defaultdict(int)
+    [uncovered_dots.update({d: 0}) for d in corners]
+
+    if len(sensors) == 1: return all([is_in_range(d, sensors[0]) for d in uncovered_dots])
+
+    for s1, s2 in combinations(sensors, 2):
+        dots = sensors_intersections(s1, s2)
+        if dots:
+            for x, y in dots:
+                if 0 <= x <= room[0] and 0 <= y <= room[1]: uncovered_dots[(x, y)] = 0
+
+    for sensor in sensors:
+        intersections = borders_intersections(room, sensor)
+        for dot in intersections:
+            uncovered_dots[dot] = 0
+
+    for sensor in sensors:
+        for dot in uncovered_dots:
+            uncovered_dots[dot] += 1 if is_in_range(dot, sensor) else 0
+
+    [print(k, v) for k, v in uncovered_dots.items()]
+    for (x, y), n in uncovered_dots.items():
+        if n < 1: return False
+        if n == 1 and (x, y) not in corners: return False
+        if n == 2 and 0 < x < room[0] and 0 < y < room[1]: return False
+    return True
+
+
+def is_in_range(dot, sensor):
+    x, y, r = sensor
+    x0, y0 = dot
+    return sqrt((x-x0)**2 + (y-y0)**2) < r + 10e-6
+
+
+def borders_intersections(room, sensor):
+    dots = []
+    xr, yr = room
+    x, y, r = sensor
+    if x <= r:
+        dy = round(sqrt(r**2 - x**2),6)
+        if y + dy <= yr: dots.append((0, y+dy))
+        if y - dy >= 0: dots.append((0, y-dy))
+    if x + r >= xr:
+        dy = round(sqrt(r**2 - (xr-x)**2), 6)
+        if y + dy <= yr: dots.append((xr, y+dy))
+        if y - dy >= 0: dots.append((xr, y-dy))
+    if y <= r:
+        dx = round(sqrt(r**2 - y**2), 6)
+        if x + dx <= xr: dots.append((x+dx, 0))
+        if x - dx >= 0: dots.append((x-dx, 0))
+    if y + r >= yr:
+        dx = round(sqrt(r**2 - (yr-y)**2), 6)
+        if x + dx <= xr: dots.append((x+dx, yr))
+        if x - dx >= 0: dots.append((x-dx, yr))
+    return dots
+
+
+def sensors_intersections(sensor1, sensor2):
+    dots = []
+    x1, y1, r1 = sensor1
+    x2, y2, r2 = sensor2
+    d = round(sqrt((x2-x1)**2 + (y2-y1)**2), 6)
+    if r1 + r2 >= d > abs(r1-r2):
+
+        a = (r1**2 - r2**2 + d**2)/(2*d)
+        h = sqrt(r1**2 - a**2)
+
+        x_d = x1 + a*(x2 - x1)/d
+        y_d = y1 + a*(y2 - y1)/d
+
+        x_int_1 = round(x_d + h*(y2 - y1)/d, 6)
+        y_int_1 = round(y_d - h*(x2 - x1)/d, 6)
+
+        x_int_2 = round(x_d - h*(y2 - y1)/d, 6)
+        y_int_2 = round(y_d + h*(x2 - x1)/d, 6)
+
+        dots.extend([(x_int_1, y_int_1), (x_int_2, y_int_2)])
+    return dots
+
+
+def make_random_test_test(n):
+    tests = []
+    for _ in range(n):
+        h = choice(range(100, 1100, 50))
+        w = h * choice(range(1, 5))
+        x_interval = list(range(0, w+5, w//20))
+        y_interval = list(range(0, h+5, h//20))
+        r_interval = list(range(h//10, h, h//20))
+        sensors_num = choice(range(5, 11))
+        sensors = []
+        for _ in range(sensors_num):
+            x = choice(x_interval)
+            x_interval.remove(x)
+            y = choice(y_interval)
+            y_interval.remove(y)
+            r = choice(r_interval)
+            r_interval.remove(r)
+            sensors.append([x, y, r])
+        tests.append(
+            {
+                "input": [[w, h], sensors],
+                "answer": judge([w, h], sensors)
+            }
+        )
+    return tests
 
 
 TESTS = {
@@ -98,5 +203,6 @@ TESTS = {
             "input": [[800, 800], [[0, 0, 570], [0, 800, 500], [800, 0, 500], [800, 800, 570]]],
             "answer": True
         }
-    ]
+    ],
+    "Randoms": make_random_test_test(10)
 }
