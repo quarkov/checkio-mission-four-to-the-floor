@@ -34,12 +34,11 @@
     your task is to determine whether the floor area is completely into the sensors coverage area (return True) or not (return False). The bottom left corner of the rectangle matches the origin point <b>O</b>,
     the top right corner is defined by <b>W</b> and <b>H</b>. Each sensor is defined by its mounting point (coordinates <b>x<sub>i</sub></b> and <b>y<sub>i</sub></b>) and its range (<b>R<sub>i</sub></b>).
 </p>
-<!-- Explain input and output values
+
 <p style="text-align: center;">
     <img  title="example" src="{{MEDIA}}pir_scheme.png" alt="scheme" style="max-height: 350px"/>
 </p>
--->
-<!-- Explain input and output values -->
+
 <p>
     <strong>Input: </strong> Two arguments:
     <ul>
@@ -57,20 +56,20 @@
     <strong>Output: </strong> True or False.
 </p>
 
-
-<!-- Give some usage examples -->
 <div class="for_info_only">
     <p>
         <strong>Example:</strong>
     </p>
 
 {% if interpreter.slug == "js-node" %}
-<pre class="brush: javascript">isCovered([200, 150], [[100, 75, 130]]) == True                                   //example №1
+<pre class="brush: javascript">
+isCovered([200, 150], [[100, 75, 130]]) == True                                   //example №1
 isCovered([200, 150], [[50, 75, 100], [150, 75, 100]]) == True                    //example №2
 isCovered([200, 150], [[50, 75, 100], [150, 25, 50], [150, 125, 50]]) == False    //example №3
 </pre>
 {% else %}
-<pre class="brush: python">is_covered([200, 150], [[100, 75, 130]]) == True                                   #example №1
+<pre class="brush: python">
+is_covered([200, 150], [[100, 75, 130]]) == True                                   #example №1
 is_covered([200, 150], [[50, 75, 100], [150, 75, 100]]) == True                    #example №2
 is_covered([200, 150], [[50, 75, 100], [150, 25, 50], [150, 125, 50]]) == False    #example №3
 </pre>
@@ -80,8 +79,7 @@ is_covered([200, 150], [[50, 75, 100], [150, 25, 50], [150, 125, 50]]) == False 
 <p style="text-align: center;">
     <img  title="example" src="{{MEDIA}}examples.png" alt="PIR sensor" style="max-height: 350px"/>
 </p>
-<!-- Here you can explain some constraints for input-->
-<!-- The section is optional -->
+
 <p>
     <strong>Precondition:</strong><br>
     All given values are integers.
