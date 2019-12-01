@@ -1,3 +1,39 @@
+<style>
+body .page__container #main__container {
+    background-color: black;
+    color: white;
+}
+
+body .page__container #main__container a{
+    color: white
+}
+
+body .page__container #main__container .main-container__missions__title .missions-title__name {
+    color: black;
+    background-color: white;
+}
+
+body .page__container #main__container .solve_it_panel .btn {
+    background-color: #5ae4aa;
+}
+
+body .page__container #main__container .mission-content__metainfo a {
+    color: #009c70;
+}
+
+body .content-controls-tags ul li .main-tag {
+    background-color: #474747;
+}
+
+body .page__container #main__container .content-controls label {
+    color: white;
+}
+
+body .page__container #main__container .main-container__missions__content .missions-content__description__status div {
+    display: none;
+}
+</style>
+
 <p>
     Почему бы не поговорить о <a href="https://en.wikipedia.org/wiki/Passive_infrared_sensor" title="Passive InfraRed wiki page" target="_blank">PIR</a>-системах и не решить тематическую задачу?<br>
 </p>
@@ -11,6 +47,9 @@
     Инфракрасное излучение, в свою очередь, является частью общего спектра теплового излучения. Плотность потока излучения зависит от типа объекта, его площади и температуры.
     Хотя человеческий глаз не воспринимает инфракрасное излучение, оно, тем не менее, довольно интенсивное. Если поднести сбоку ладонь к чашке с горям кофе,
     то тепло, которое можно почувствовать, и демонстрирует наглядно мощность теплового (инфракрасного) излучения.
+</p>
+<p style="text-align: center;">
+    <img  title="example" src="{{MEDIA}}room.png" alt="room" style="max-height: 420px"/>
 </p>
 <p align="justify">
     На детекции инфракрасного излучения PIR-системы (освещения и/или безопасности) и работают.
@@ -63,15 +102,15 @@
 
 {% if interpreter.slug == "js-node" %}
 <pre class="brush: javascript">
-isCovered([200, 150], [[100, 75, 130]]) == True                                   //example №1
-isCovered([200, 150], [[50, 75, 100], [150, 75, 100]]) == True                    //example №2
-isCovered([200, 150], [[50, 75, 100], [150, 25, 50], [150, 125, 50]]) == False    //example №3
+isCovered([200, 150], [[100, 75, 130]]) == True                                   //example #1
+isCovered([200, 150], [[50, 75, 100], [150, 75, 100]]) == True                    //example #2
+isCovered([200, 150], [[50, 75, 100], [150, 25, 50], [150, 125, 50]]) == False    //example #3
 </pre>
 {% else %}
 <pre class="brush: python">
-is_covered([200, 150], [[100, 75, 130]]) == True                                   #example №1
-is_covered([200, 150], [[50, 75, 100], [150, 75, 100]]) == True                    #example №2
-is_covered([200, 150], [[50, 75, 100], [150, 25, 50], [150, 125, 50]]) == False    #example №3
+is_covered([200, 150], [[100, 75, 130]]) == True                                   #example #1
+is_covered([200, 150], [[50, 75, 100], [150, 75, 100]]) == True                    #example #2
+is_covered([200, 150], [[50, 75, 100], [150, 25, 50], [150, 125, 50]]) == False    #example #3
 </pre>
 {% endif %}
 </div>
